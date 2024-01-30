@@ -8,7 +8,7 @@ public class Mover : MonoBehaviour
     public float moveUp;
     public Rigidbody rigid;
     public bool isOk = false;
-    // Update´Â 
+    
     private void Update()
     {
         if (Input.GetKey(KeyCode.W))
@@ -30,8 +30,9 @@ public class Mover : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && isOk == true)
         {
             isOk = false;
-            rigid.AddForce(Vector3.up * moveUp, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * movePower/2, ForceMode.Impulse);
         }
+         
 
     }
     private void OnCollisionEnter(Collision collision)
