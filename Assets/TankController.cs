@@ -8,7 +8,7 @@ public class TankController : MonoBehaviour
 {
     public Rigidbody rigid;
     Vector3 moveDir;
-
+    
     public float speed;
     public float moveSpeed;
     public float jump;
@@ -22,15 +22,15 @@ public class TankController : MonoBehaviour
     }
     private void Move()
     {
-        //transform.Translate(moveDirz * moveSpeed * Time.deltaTime);
+        
         transform.Translate(0,0, moveDir.z* moveSpeed  * Time.deltaTime);
-        transform.Rotate(0, moveDir.x * speed * Time.deltaTime, 0);
+        Rotate();
     } 
 
-   /* private void Rotate()
+    private void Rotate()
     {
-        transform.Rotate(moveDiry, moveSpeed, Space.Self);
-    }*/
+        transform.Rotate(0, moveDir.x * speed * Time.deltaTime, 0);
+    }
     private void OnJump(InputValue value)
     {
         bool inputButton = value.isPressed;
@@ -48,6 +48,6 @@ public class TankController : MonoBehaviour
     void Update()
     {
         Move();
-        //Rotate();
+
     }
 }
