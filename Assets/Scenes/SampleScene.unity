@@ -265,7 +265,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 747089728}
+  speed: 0
   moveSpeed: 3
+  jump: 3
 --- !u!54 &747089728
 Rigidbody:
   m_ObjectHideFlags: 0
