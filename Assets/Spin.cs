@@ -21,13 +21,11 @@ public class Spin : MonoBehaviour
 
         transform.Rotate(Vector3.up, vector3.x * spinSpeed * Time.deltaTime, Space.World);
         transform.Rotate(Vector3.right, -vector3.y * spinSpeed * Time.deltaTime, Space.Self);
-       
+
     }
     // Update is called once per frame
     void Update()
     {
-       
-            Rotate();
-       
+        Rotate();
     }
 }

@@ -7,7 +7,8 @@ using UnityEngine.InputSystem;
 public class TankController : MonoBehaviour
 {
     public Transform firePoint;
-    public GameObject bulletPrefab;    
+    public Bullet bulletPrefab;
+    public float bulletForce;
 
     // 움직임
     Vector3 moveDir;
@@ -15,6 +16,7 @@ public class TankController : MonoBehaviour
     public float moveSpeed;
     public float jump;
     public Rigidbody rigid;
+
 
     private void OnMove(InputValue value)
     {
@@ -26,7 +28,7 @@ public class TankController : MonoBehaviour
     private void Move()
     {
         transform.Translate(0, 0, moveDir.z * moveSpeed * Time.deltaTime);
-        
+
     }
 
     private void Rotate()
@@ -44,15 +46,26 @@ public class TankController : MonoBehaviour
     {
         rigid.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
-    
+    Coroutine Coroutine;
     private void OnFire(InputValue value)
     {
-        Fire();
+        StartCoroutine(FireCoroutine());
     }
     private void Fire()
     {
         // 프리팹을 실행중에 만들어주는 함수
-        Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        bullet.force = bulletForce;
+    }
+
+    IEnumerator FireCoroutine()
+    {
+        bulletForce = 5f;
+        float strat = Time.time;
+        yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
+        float end = Time.time;
+        bulletForce += bulletForce + (end - strat) * 3;
+        Fire();
     }
 
     // Update is called once per frame
