@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,9 +14,10 @@ public class TankController : MonoBehaviour
     // 움직임
     Vector3 moveDir;
     public float speed;
-    public float moveSpeed;
+    public float movePower;
     public float jump;
     public Rigidbody rigid;
+    public float maxSpeed;
 
 
     private void OnMove(InputValue value)
@@ -25,9 +27,23 @@ public class TankController : MonoBehaviour
         moveDir.z = imputDir.y;
 
     }
+    private void FixedUpdate()
+    {
+        Move();
+    }
     private void Move()
     {
-        transform.Translate(0, 0, moveDir.z * moveSpeed * Time.deltaTime);
+        Vector3 forceDir = transform.forward * moveDir.z;
+        rigid.AddForce(forceDir * movePower, ForceMode.Force);
+
+        // AddForce를 사용할때에 속도 제한 방법
+        if(rigid.velocity.magnitude > maxSpeed)
+        {
+            
+            rigid.velocity = rigid.velocity.normalized * maxSpeed;
+            Debug.Log(rigid.velocity.magnitude);
+        }
+        //transform.Translate(0, 0, moveDir.z * moveSpeed * Time.deltaTime);
 
     }
 
@@ -60,7 +76,6 @@ public class TankController : MonoBehaviour
 
     IEnumerator FireCoroutine()
     {
-        bulletForce = 5f;
         float strat = Time.time;
         yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
         float end = Time.time;
@@ -71,7 +86,6 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
         Rotate();
     }
 }

@@ -6,12 +6,17 @@ public class Bullet : MonoBehaviour
 {
     public Rigidbody rigid;
     public float force;
-
+    public GameObject explosionEffect;
     private void Start()
     {
         // 총알이 5초뒤에 사라짐
         Destroy(gameObject, 5f);
 
         rigid.AddForce(transform.forward * force, ForceMode.Impulse);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        Instantiate(explosionEffect, transform.position, transform.rotation);
+        Destroy(gameObject);        
     }
 }
