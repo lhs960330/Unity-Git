@@ -39,7 +39,6 @@ public class TankController : MonoBehaviour
         // AddForce를 사용할때에 속도 제한 방법
         if(rigid.velocity.magnitude > maxSpeed)
         {
-            
             rigid.velocity = rigid.velocity.normalized * maxSpeed;
             Debug.Log(rigid.velocity.magnitude);
         }
@@ -76,6 +75,7 @@ public class TankController : MonoBehaviour
 
     IEnumerator FireCoroutine()
     {
+        bulletForce = 10f;
         float strat = Time.time;
         yield return new WaitUntil(() => Input.GetKeyUp(KeyCode.E));
         float end = Time.time;
