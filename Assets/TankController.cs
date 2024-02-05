@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -19,7 +20,27 @@ public class TankController : MonoBehaviour
     public Rigidbody rigid;
     public float maxSpeed;
 
+    // 카메라
+    public CinemachineVirtualCamera normalCamera;
+    public CinemachineVirtualCamera ZoomCamera;
 
+    // 사운드
+    public AudioSource audioSource;
+
+
+    private void OnZoom(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            Debug.Log("Zoom on");
+            ZoomCamera.Priority = 20;
+        }
+        else
+        {
+            Debug.Log("Zoom of");
+            ZoomCamera.Priority =0;
+        }
+    }
     private void OnMove(InputValue value)
     {
         Vector2 imputDir = value.Get<Vector2>();
@@ -68,6 +89,7 @@ public class TankController : MonoBehaviour
     }
     private void Fire()
     {
+        audioSource.Play();
         // 프리팹을 실행중에 만들어주는 함수
         Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.force = bulletForce;
@@ -82,7 +104,7 @@ public class TankController : MonoBehaviour
         bulletForce += bulletForce + (end - strat) * 3;
         Fire();
     }
-
+    
     // Update is called once per frame
     void Update()
     {
