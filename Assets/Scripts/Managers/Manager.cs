@@ -16,7 +16,7 @@ public class Manager : MonoBehaviour
         if (instance != null)
         {
             Debug.LogWarning("Singleton already exist");
-            Destroy(this); //이미 있으면 지워주는 방식으로 사용하자
+            Destroy(gameObject); //이미 있으면 지워주는 방식으로 사용하자
             return;
         }
         instance = this; // 새로운 친구를 this로 지정
