@@ -206,11 +206,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 999641139406155242}
-  bulletPrefab: {fileID: 629342821681876871, guid: 18d94c0f402e06c4aa6cdcd00b627b53, type: 3}
+  bulletPrefab: {fileID: -3479465321733823216, guid: 18d94c0f402e06c4aa6cdcd00b627b53, type: 3}
+  bulletForce: 0
   speed: 50
-  moveSpeed: 7
+  movePower: 0
   jump: 3
   rigid: {fileID: 707140604921495448}
+  maxSpeed: 0
+  normalCamera: {fileID: 0}
+  ZoomCamera: {fileID: 0}
+  audioSource: {fileID: 0}
+  animator: {fileID: 0}
+  OnFiering:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFired:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7820511527174282938
 MonoBehaviour:
   m_ObjectHideFlags: 0

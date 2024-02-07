@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class TankController : MonoBehaviour
@@ -29,6 +30,9 @@ public class TankController : MonoBehaviour
 
     // 애니메이션
     public Animator animator;
+
+    public UnityEvent OnFiering;
+    public UnityEvent OnFired;
 
 
 
@@ -93,17 +97,23 @@ public class TankController : MonoBehaviour
     }
     public void Fire()
     {
-        audioSource.Play();
+        // 포탄 날리기때 애니메이션
+        // 하는 중
+        OnFiering?.Invoke();
+        //audioSource.Play();
         // 프리팹을 실행중에 만들어주는 함수
         Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.force = bulletForce;
-        animator.SetTrigger("Fire");
+        //animator.SetTrigger("Fire");
 
         // 싱글톤을 이용한 포탄 발사 횟수
         // Manager.GetInstance().AddFireCount();
-        Manager.DataManager.AddFireCount();
+        Manager.Data.FireCount++;
         // 이게 있으면 쏠때마다 멈춤
         //Manager.Game.GamePause();
+        // 포탄 날리때 사운드
+        // 끝날 때 
+        OnFired?.Invoke();
     }
 
     IEnumerator FireCoroutine()
