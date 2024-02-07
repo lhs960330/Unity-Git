@@ -29,20 +29,18 @@ public class TankController : MonoBehaviour
 
     // 애니메이션
     public Animator animator;
-    
+
 
 
     private void OnZoom(InputValue value)
     {
         if (value.isPressed)
         {
-            Debug.Log("Zoom on");
             ZoomCamera.Priority = 20;
         }
         else
         {
-            Debug.Log("Zoom of");
-            ZoomCamera.Priority =0;
+            ZoomCamera.Priority = 0;
         }
     }
     private void OnMove(InputValue value)
@@ -62,10 +60,10 @@ public class TankController : MonoBehaviour
         rigid.AddForce(forceDir * movePower, ForceMode.Force);
 
         // AddForce를 사용할때에 속도 제한 방법
-        if(rigid.velocity.magnitude > maxSpeed)
+        if (rigid.velocity.magnitude > maxSpeed)
         {
             rigid.velocity = rigid.velocity.normalized * maxSpeed;
-            Debug.Log(rigid.velocity.magnitude);
+
         }
         //transform.Translate(0, 0, moveDir.z * moveSpeed * Time.deltaTime);
 
@@ -86,7 +84,7 @@ public class TankController : MonoBehaviour
     {
         rigid.AddForce(Vector3.up * jump, ForceMode.Impulse);
     }
-    
+
     Coroutine Coroutine;
     private void OnFire(InputValue value)
     {
@@ -110,7 +108,7 @@ public class TankController : MonoBehaviour
         bulletForce += bulletForce + (end - strat) * 3;
         Fire();
     }
-    
+
     // Update is called once per frame
     void Update()
     {
