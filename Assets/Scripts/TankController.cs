@@ -31,6 +31,7 @@ public class TankController : MonoBehaviour
     // 애니메이션
     public Animator animator;
 
+    // 옵저버
     public UnityEvent OnFiering;
     public UnityEvent OnFired;
 
@@ -99,6 +100,7 @@ public class TankController : MonoBehaviour
     {
         // 포탄 날리기때 애니메이션
         // 하는 중
+        // ?.은 null이 아닐때만 실행
         OnFiering?.Invoke();
         //audioSource.Play();
         // 프리팹을 실행중에 만들어주는 함수
@@ -108,7 +110,8 @@ public class TankController : MonoBehaviour
 
         // 싱글톤을 이용한 포탄 발사 횟수
         // Manager.GetInstance().AddFireCount();
-        Manager.Data.FireCount++;
+        Manager.Data.FireCount += 1;
+
         // 이게 있으면 쏠때마다 멈춤
         //Manager.Game.GamePause();
         // 포탄 날리때 사운드

@@ -9,9 +9,10 @@ public class Manager : MonoBehaviour
     [SerializeField] DataManager dataManager;
     public static Manager GetInstance() { return instance; }
     public static GameManager Game { get { return instance.gameManager; } }
-    public static DataManager Data { get {  return instance.dataManager; } }
+    public static DataManager Data { get { return instance.dataManager; } }
     private void Awake()
     {
+
         if (instance != null)
         {
             Debug.LogWarning("Singleton already exist");
