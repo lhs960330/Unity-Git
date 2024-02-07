@@ -48,6 +48,7 @@ public class TankController : MonoBehaviour
         Vector2 imputDir = value.Get<Vector2>();
         moveDir.x = imputDir.x;
         moveDir.z = imputDir.y;
+        
 
     }
     private void FixedUpdate()
@@ -97,6 +98,12 @@ public class TankController : MonoBehaviour
         Bullet bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         bullet.force = bulletForce;
         animator.SetTrigger("Fire");
+
+        // ΩÃ±€≈Ê¿ª ¿ÃøÎ«— ∆˜≈∫ πﬂªÁ »Ωºˆ
+        // Manager.GetInstance().AddFireCount();
+        Manager.DataManager.AddFireCount();
+        // ¿Ã∞‘ ¿÷¿∏∏È ΩÚ∂ß∏∂¥Ÿ ∏ÿ√„
+        //Manager.Game.GamePause();
     }
 
     IEnumerator FireCoroutine()
@@ -108,8 +115,8 @@ public class TankController : MonoBehaviour
         bulletForce += bulletForce + (end - strat) * 3;
         Fire();
     }
-
-    // Update is called once per frame
+  
+   
     void Update()
     {
         Rotate();
